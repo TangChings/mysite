@@ -1,0 +1,15 @@
+ul.blog_types{
+    list-style-type:none;
+    padding:0 0 0 4%;
+    display:flex;
+    flex-direction:column;
+}
+li.glyphicon{
+    margin-bottom:5%;
+}
+.division{
+    border-bottom-width:1px;
+    border-bottom-style:solid;
+    border-bottom-color:#eee;
+}
+

@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+
+{%block title%}
+Chingshek
+{%endblock%}
+
+{%load staticfiles%}
+{%block header_extends%}
+<link rel="stylesheet" href="{%static 'blog/home.css'%}">
+<link rel="stylesheet" href="/static/bootstrap/css/carousel.css">
+{%endblock%}
+
+{%block nav_about_active%}active{%endblock%}
+
+{%block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <div class="panel panel-default" style="margin-top:50px;box-shadow: 2px 2px 1px #e7e7e7;">
+                <div class="panel-body" style="width: 100%;height: auto;word-wrap:break-word;word-break:break-all;overflow: hidden;">
+                    <h1>关于我</h1><br>
+                    <h4>来自兰州大学的生物技术专业在读本科生，在为转行计算机做准备</h4><br>
+                    <h4>我会把这个网站做成一个技术博客</h4><br>
+                    <h4>从网站开发到微信小程序</h4><br>
+                    <h4>从前端到后端，从硬件（并不懂）到软件</h4><br>
+                    <h4>除了IT，我还对汽车、电脑、手机、耳机（退坑）感兴趣</h4><br>
+                    <h4>所以这里还将有更多好玩的东西</h4><br>
+                    <h4>请期待吧！</h4>
+                    <h4 style="float:right;">——chingshek</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
