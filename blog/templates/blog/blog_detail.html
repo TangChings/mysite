@@ -18,22 +18,22 @@
                     <p style="text-align:center;">
                         作者：{{blog.author}}
                     </p>
-                    <div style="width: 100%;height: auto;word-wrap:break-word;word-break:break-all;overflow: hidden;">
+                    <div style="width: 100%;height: auto;word-wrap:break-word;word-break:break-all;overflow: hidden;" id="with_picture">
                         {{blog.content|safe}}
                     </div>
                     <div class="blog-more" style="display:flex;flex-direction:row;margin-top:1em;">
-                        <p>
+                        <p style="margin-left:1%;">
                             <span class="glyphicon glyphicon-triangle-top"></span>
-                            {% if previous_blog %}
-                            <a href="{%url 'blog_detail' previous_blog.pk%}">上一篇：{{previous_blog.title}}</a>
+                            {% if next_blog %}
+                            <a href="{%url 'blog_detail' next_blog.pk%}">上一篇：{{next_blog.title}}</a>
                             {% else %}
                             上一篇：无
                             {% endif %}
                         </p>
-                        <p style="margin-left:1%;">
+                        <p>
                             <span class="glyphicon glyphicon-triangle-bottom"></span>
-                            {% if next_blog %}
-                            <a href="{%url 'blog_detail' next_blog.pk%}">下一篇：{{next_blog.title}}</a>
+                            {% if previous_blog %}
+                            <a href="{%url 'blog_detail' previous_blog.pk%}">下一篇：{{previous_blog.title}}</a>
                             {% else %}
                             下一篇：无
                             {% endif %}
