@@ -31,10 +31,10 @@
                         <p class="text-font">{{blog.content|striptags|truncatechars_html:120}}</p>
                       </div>
                 </div>
-                <p>一共有{{page_of_blogs.paginator.count}}篇博客</p>
                 {%empty%}
                 <h2 style="margin-top:50px;">暂无博客</h2>
                 {% endfor %}
+		<p>一共有{{page_of_blogs.paginator.count}}篇博客</p>
                     <ul class="pagination">
                         {#上一页#}
                         <li>
