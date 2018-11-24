@@ -1,4 +1,2 @@
-# mysite
-mysite
 # 说明
-个人博客网站
+chingshek的个人博客网站
