@@ -30,3 +30,11 @@ div#with_picture>p>img{
     width:100%!important;
     height:auto!important;
 }
+.infoList{
+    display:flex;
+    flex-direction:column;
+}
+div.infoList>p{
+    text-align:center;
+    margin-bottom:1px;
+}

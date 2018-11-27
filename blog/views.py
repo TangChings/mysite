@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response,get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Count
 from .models import Blog,BlogType
+from read_statistics.utils import read_statistics_once_read
 
 def blogs_public_functions(request,blogs_all_list):
     paginator = Paginator(blogs_all_list, 10)
@@ -59,10 +60,15 @@ def blogs_with_date(request,year,month):
 def blog_detail(request,blog_pk):
     context = {}
     blog = get_object_or_404(Blog,pk=blog_pk)
+    read_cookie_key = read_statistics_once_read(request,blog)
+
+
     context['previous_blog'] = Blog.objects.filter(created_time__gt=blog.created_time).last()
     context['next_blog'] = Blog.objects.filter(created_time__lt=blog.created_time).first()
     context['blog'] = blog
-    return render_to_response('blog/blog_detail.html',context)
+    response = render_to_response('blog/blog_detail.html',context) #响应
+    response.set_cookie(read_cookie_key,'true') #阅读cookie标记
+    return response
 
 def blog_about(request):
     context = {}
