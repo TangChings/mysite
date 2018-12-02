@@ -26,6 +26,7 @@ urlpatterns = [
         'ckeditor_uploader.urls'
     )),
     path('blog/',include('blog.urls')),
+    path('comment-policy/',views.comment_policy,name='comment-policy')
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -12,3 +12,7 @@ def home(request):
     context['read_nums'] = read_nums
     context['recent_blogs'] = blogs_all_list
     return render_to_response('home.html',context)
+
+def comment_policy(request):
+    context = {}
+    return render_to_response('comment-policy.html',context)
