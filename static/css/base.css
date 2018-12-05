@@ -25,11 +25,6 @@ body{
     display:flex;
     flex-direction:row;
 }
-div#with_picture>p>img{
-    display:block;
-    width:100%!important;
-    height:auto!important;
-}
 .infoList{
     display:flex;
     flex-direction:column;
