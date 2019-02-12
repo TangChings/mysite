@@ -18,6 +18,7 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from psychology.ReturnScore import score_response
 
 urlpatterns = [
     path('',views.home,name='home'),
@@ -26,7 +27,8 @@ urlpatterns = [
         'ckeditor_uploader.urls'
     )),
     path('blog/',include('blog.urls')),
-    path('comment-policy/',views.comment_policy,name='comment-policy')
+    path('comment-policy/',views.comment_policy,name='comment-policy'),
+    path('psychology/',score_response)
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
