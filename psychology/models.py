@@ -1,3 +1,13 @@
 from django.db import models
 
-# Create your models here.
+class Anxietyscale(models.Model):
+    question = models.TextField()
+
+    def __str__(self):
+        return self.question
+
+class Depressionscale(models.Model):
+    question = models.TextField()
+
+    def __str__(self):
+        return self.question
