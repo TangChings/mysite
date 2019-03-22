@@ -18,7 +18,6 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
-from psychology.ReturnScore import score_response
 from psychology.views import get_questions
 
 urlpatterns = [
@@ -29,7 +28,7 @@ urlpatterns = [
     )),
     path('blog/',include('blog.urls')),
     path('comment-policy/',views.comment_policy,name='comment-policy'),
-    path('psychology/',get_questions)
+    path('psychology/',include('psychology.urls'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
