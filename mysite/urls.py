@@ -18,7 +18,7 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
-from psychology.views import get_questions
+from xiaoqin.views import generate_picture
 
 urlpatterns = [
     path('',views.home,name='home'),
@@ -27,8 +27,8 @@ urlpatterns = [
         'ckeditor_uploader.urls'
     )),
     path('blog/',include('blog.urls')),
-    path('comment-policy/',views.comment_policy,name='comment-policy'),
-    path('psychology/',include('psychology.urls'))
+    path('comment-policy/', views.comment_policy, name='comment-policy'),
+    path('xiaoqin/', generate_picture, name='generate_picture')
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
