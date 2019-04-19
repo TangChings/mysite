@@ -5,32 +5,214 @@
 	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>兰州大学校庆头像制作</title>
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <title>兰州大学110周年校庆头像制作</title>
     <link rel="shortcut icon" href="/media/inter no.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/cropper.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
 </head>
 <body>
+<!-- 校庆网页头部 -->
+<header class="header">
 	<div class="container">
-		<h1 class="text-center">兰州大学校庆头像制作</h1>
-		<div class="row">
-			<div class="col-xs-4 col-md-4">
-	      		<img src="/media/inter no.png" alt="1" class="img-circle img-responsive">
-			</div>
-			<div class="col-xs-4 col-md-4">
-	      			<img src="/media/inter no.png" alt="2" class="img-circle img-responsive">
-			</div>
-			<div class="col-xs-4 col-md-4">
-	      			<img src="/media/inter no.png" alt="3" class="img-circle img-responsive">
-			</div>
-			<form>
-				<div class="form-group">
-					<input type="file" name="upload" id="uploadPicture">
+        <div class="row">
+            <div class="head-top clearfix">
+                <div class="navbar-header">
+                    <div class="navbar-brand"><img src="/media/lzulogo.png" class="img-fluid" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container" style="background-color: #fff">
+	<div class="panel panel-default" style="margin-top:5%">
+		<div class="panel-body">
+			<div class="panel-body">
+				<h1 class="text-center">兰州大学110周年校庆头像制作</h1>
+				<!-- 选择头像外框 -->
+				<form>
+					<div style="display: flex;flex-direction: column;">
+						<img src="/media/cat.png" alt="touxiang" height="30%" width="30%">
+						<label for="touxiang1">头像1</label>
+						<input type="radio" name="touxiang" id="touxiang1">
+					</div>
+					<div>
+						<img src="/media/cat.png" alt="touxiang" height="30%" width="30%">
+						<label for="touxiang2">头像2</label>	
+						<input type="radio" name="touxiang" id="touxiang2">
+					</div>
+				</form>
+				<!-- 上传图片 -->
+				<label class="label" data-toggle="tooltip" title="上传图片" style="margin: 2% auto">
+      				<img class="rounded" id="avatar" src="/media/upload.png" alt="avatar">
+      				<input type="file" class="sr-only" id="input" name="image" accept="image/*">
+    			</label>
+    			<div class="progress">
+      				<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    			</div>
+    			<div class="alert" role="alert"></div>
+				<!-- 裁剪图片modal框 -->
+    			<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			      <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			          <div class="modal-header">
+			            <h5 class="modal-title" id="modalLabel">裁剪图片</h5>
+			            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			              <span aria-hidden="true">&times;</span>
+			            </button>
+			          </div>
+			          <div class="modal-body">
+			            <div class="img-container">
+			              <img id="image" src="/media/upload.png">
+			            </div>
+			          </div>
+			          <div class="modal-footer">
+			            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+			            <button type="button" class="btn btn-primary" id="crop">确定</button>
+			          </div>
+			        </div>
+			      </div>
+			    </div>
+
+				<!-- <div class="row">
+				<div class="col-xs-3 col-md-3">
+		      		<img src="/media/cat.png" alt="1" class="img-circle img-responsive">
 				</div>
-				<button class="btn btn-default" type="submit">生成头像</button>
-			</form>
+				<div class="col-xs-3 col-md-3">
+		      			<img src="/media/cat.png" alt="2" class="img-circle img-responsive">
+				</div>
+				<div class="col-xs-3 col-md-3">
+		      			<img src="/media/cat.png" alt="3" class="img-circle img-responsive">
+				</div>
+				<form>
+					<div class="form-group">
+						<input type="file" name="upload" id="uploadPicture">
+					</div>
+					<button class="btn btn-default" type="submit">生成头像</button>
+				</form>
+				</div> -->
+			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="/static/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+</div>
+
+    
+    
+    
+    
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/cropper.min.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var avatar = document.getElementById('avatar');
+      var image = document.getElementById('image');
+      var input = document.getElementById('input');
+      var $progress = $('.progress');
+      var $progressBar = $('.progress-bar');
+      var $alert = $('.alert');
+      var $modal = $('#modal');
+      var cropper;
+
+      $('[data-toggle="tooltip"]').tooltip();
+
+      input.addEventListener('change', function (e) {
+        var files = e.target.files;
+        var done = function (url) {
+          input.value = '';
+          image.src = url;
+          $alert.hide();
+          $modal.modal('show');
+        };
+        var reader;
+        var file;
+        var url;
+
+        if (files && files.length > 0) {
+          file = files[0];
+
+          if (URL) {
+            done(URL.createObjectURL(file));
+          } else if (FileReader) {
+            reader = new FileReader();
+            reader.onload = function (e) {
+              done(reader.result);
+            };
+            reader.readAsDataURL(file);
+          }
+        }
+      });
+
+      $modal.on('shown.bs.modal', function () {
+        cropper = new Cropper(image, {
+          aspectRatio: 1,
+          viewMode: 3,
+        });
+      }).on('hidden.bs.modal', function () {
+        cropper.destroy();
+        cropper = null;
+      });
+
+      document.getElementById('crop').addEventListener('click', function () {
+        var initialAvatarURL;
+        var canvas;
+
+        $modal.modal('hide');
+
+        if (cropper) {
+          canvas = cropper.getCroppedCanvas({
+            width: 160,
+            height: 160,
+          });
+          initialAvatarURL = avatar.src;
+          avatar.src = canvas.toDataURL();
+          $progress.show();
+          $alert.removeClass('alert-success alert-warning');
+          canvas.toBlob(function (blob) {
+            var formData = new FormData();
+
+            formData.append('avatar', blob, 'avatar.jpg');
+            $.ajax('https://jsonplaceholder.typicode.com/posts', {
+              method: 'POST',
+              data: formData,
+              processData: false,
+              contentType: false,
+
+              xhr: function () {
+                var xhr = new XMLHttpRequest();
+
+                xhr.upload.onprogress = function (e) {
+                  var percent = '0';
+                  var percentage = '0%';
+
+                  if (e.lengthComputable) {
+                    percent = Math.round((e.loaded / e.total) * 100);
+                    percentage = percent + '%';
+                    $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
+                  }
+                };
+
+                return xhr;
+              },
+
+              success: function () {
+                $alert.show().addClass('alert-success').text('Upload success');
+              },
+
+              error: function () {
+                avatar.src = initialAvatarURL;
+                $alert.show().addClass('alert-warning').text('上传错误！');
+              },
+
+              complete: function () {
+                $progress.hide();
+              },
+            });
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
